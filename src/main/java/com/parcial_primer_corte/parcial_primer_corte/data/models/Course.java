@@ -30,7 +30,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", length = 100, nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)

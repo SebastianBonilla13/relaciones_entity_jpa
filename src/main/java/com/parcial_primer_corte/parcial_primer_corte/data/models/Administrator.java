@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "administrativo")
 public class Administrator extends Person {
 
-    @Column(name = "rol")
+    @Column(name = "rol", length = 255, nullable = false)
     private String rol;
 
     public Administrator() {
