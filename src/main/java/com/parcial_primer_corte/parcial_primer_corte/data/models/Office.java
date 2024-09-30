@@ -24,9 +24,9 @@ public class Office {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "nombre")
+    @Column(name = "nombre", length = 100, nullable = false)
     private String name;
-    @Column(name = "ubicacion")
+    @Column(name = "ubicacion", length = 100, nullable = false)
     private String location;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "office")

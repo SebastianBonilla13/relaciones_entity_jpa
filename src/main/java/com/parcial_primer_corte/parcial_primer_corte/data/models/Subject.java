@@ -28,10 +28,10 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", length = 100, nullable = false)
     private String name;
 
-    @Column(name = "codigo")
+    @Column(name = "codigo", length = 100, nullable = false)
     private String code;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")

@@ -28,7 +28,7 @@ public class TimeSlot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "dia")
+    @Column(name = "dia", length = 100, nullable = false)
     private String day;
 
     @Column(name = "hora_inicio")
