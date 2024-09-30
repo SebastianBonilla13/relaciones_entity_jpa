@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping("/api/v1/parcial")
+@RequestMapping("/api/v1/parcial/persona")
 public class PersonController {
 
     private final IPersonService service;
