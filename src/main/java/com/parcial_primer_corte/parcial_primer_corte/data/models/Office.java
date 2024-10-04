@@ -2,6 +2,7 @@ package com.parcial_primer_corte.parcial_primer_corte.data.models;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,6 +30,6 @@ public class Office {
     @Column(name = "ubicacion", length = 100, nullable = false)
     private String location;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "office")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "office", cascade = { CascadeType.PERSIST })
     private Teacher teacher;
 }

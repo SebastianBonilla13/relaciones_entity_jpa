@@ -2,6 +2,7 @@ package com.parcial_primer_corte.parcial_primer_corte.data.models;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,7 +28,7 @@ import lombok.Setter;
 @Table(name = "docente")
 public class Teacher extends Person {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
     @JoinColumn(name = "oficina_id", nullable = false)
     private Office office;
 
