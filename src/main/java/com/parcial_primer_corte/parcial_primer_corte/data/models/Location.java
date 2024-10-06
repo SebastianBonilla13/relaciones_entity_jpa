@@ -10,11 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
@@ -22,6 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Table(name = "espacio_fisico")
 public class Location {
     @Id
@@ -36,4 +33,15 @@ public class Location {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "location")
     private List<TimeSlot> timeSlots;
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", capacity=" + capacity +
+                ", timeSlotsCount=" + (timeSlots != null ? timeSlots.size() : 0) +
+                '}';
+    }
+
 }

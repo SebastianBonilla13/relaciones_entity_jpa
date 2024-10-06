@@ -6,16 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
 @Getter
 @Setter
+@ToString
 @Table(name = "administrativo")
 public class Administrator extends Person {
 
@@ -29,6 +26,16 @@ public class Administrator extends Person {
     public Administrator(String name, String lastname, String email, String rol) {
         super(name, lastname, email);
         this.rol = rol;
+    }
+
+    @Override
+    public String toString() {
+        return "Administrator{" +
+                "name='" + getName() + '\'' +  // Llamada a getName() de la clase Person
+                ", lastname='" + getLastname() + '\'' +  // Llamada a getLastname() de la clase Person
+                ", email='" + getEmail() + '\'' +  // Llamada a getEmail() de la clase Person
+                ", rol='" + rol + '\'' +  // Propiedad específica de Administrator
+                '}';
     }
 
 }

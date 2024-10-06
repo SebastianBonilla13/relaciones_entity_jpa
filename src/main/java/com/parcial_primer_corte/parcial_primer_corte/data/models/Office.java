@@ -15,11 +15,13 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "oficina")
 public class Office {
     @Id
@@ -32,4 +34,14 @@ public class Office {
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "office", cascade = { CascadeType.PERSIST })
     private Teacher teacher;
+
+    @Override
+    public String toString() {
+        return "Office{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", teacher=" + (teacher != null ? teacher.getName() : "None") +
+                '}';
+    }
 }

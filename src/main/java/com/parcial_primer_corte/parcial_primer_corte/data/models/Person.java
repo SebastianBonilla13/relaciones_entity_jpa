@@ -8,11 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
@@ -20,6 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Table(name = "persona")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {
@@ -40,6 +37,16 @@ public class Person {
         this.email = email;
         this.name = name;
         this.lastname = lastname;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
 }

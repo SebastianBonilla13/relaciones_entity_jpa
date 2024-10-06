@@ -15,16 +15,13 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Data
 @Getter
 @Setter
 @Entity
+@ToString
 @Table(name = "docente")
 public class Teacher extends Person {
 
@@ -32,7 +29,7 @@ public class Teacher extends Person {
     @JoinColumn(name = "oficina_id", nullable = false)
     private Office office;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "curso_docente", joinColumns = @JoinColumn(name = "docente_id"), inverseJoinColumns = @JoinColumn(name = "curso_id"))
     private List<Course> courses;
 
@@ -46,4 +43,14 @@ public class Teacher extends Person {
         this.courses = courses;
     }
 
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "office=" + (office != null ? office.getName() : "null") +
+                ", courses=" + (courses != null ? courses.stream().map(Course::getName).toList() : "null") +
+                ", name='" + getName() + '\'' +
+                ", lastname='" + getLastname() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                '}';
+    }
 }

@@ -10,11 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
@@ -22,6 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Table(name = "asignatura")
 public class Subject {
     @Id
@@ -37,4 +34,13 @@ public class Subject {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private List<Course> courses;
 
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }

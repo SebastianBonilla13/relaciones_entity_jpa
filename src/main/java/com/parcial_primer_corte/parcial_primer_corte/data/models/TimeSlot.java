@@ -11,11 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
@@ -23,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Table(name = "franja_horaria")
 public class TimeSlot {
     @Id
@@ -46,4 +43,15 @@ public class TimeSlot {
     @JoinColumn(name = "espacio_fisico_id", nullable = false)
     private Location location;
 
+    @Override
+    public String toString() {
+        return "TimeSlot{" +
+                "id=" + id +
+                ", day='" + day + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", course=" + (course != null ? course.getName() : "null") +
+                ", location=" + (location != null ? location.getName() : "null") +
+                '}';
+    }
 }
