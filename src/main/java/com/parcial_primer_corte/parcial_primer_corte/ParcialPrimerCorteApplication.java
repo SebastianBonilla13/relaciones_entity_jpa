@@ -47,46 +47,51 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 
 		/**
 		 * EJECUCIÓN PRIMER PUNTO
-		 * */
+		 */
+		System.out.println("PUNTO 1");
 		createTeacher();
 
 		/**
 		 * EJECUCIÓN SEGUNDO PUNTO
-		 * */
+		 */
+		System.out.println("PUNTO 2");
 		createSubject();
 		createCourse();
 		asociateCourseAndTeacher();
 
 		/**
 		 * EJECUCION PUNTO 3
-		 * */
+		 */
+		System.out.println("PUNTO 3");
 		this.createLocations();
 		this.createTimeSlot1();
 		this.createTimeSlot2();
 		this.createTimeSlot3();
 
 		/**
-		 * 	EJECUCIÓN PUNTO 4
-		 * */
+		 * EJECUCIÓN PUNTO 4
+		 */
+		System.out.println("PUNTO 4");
 		this.listTimeSlots();
 
-
 		/**
-		 * 	EJECUCIPIN PUNTO 5
-		 * */
+		 * EJECUCIÓN PUNTO 5
+		 */
+		System.out.println("PUNTO 5");
 		this.timeSlotByTeacherId(1);
 
 		/**
 		 * EJECUCIÓN PUNTO 6
-		 * */
+		 */
+		System.out.println("PUNTO 6");
 		this.deleteCourseById(1);
-	}
 
+	}
 
 	/**
 	 * PRIMER PUNTO
 	 * Creación de un docente con la asociación de una oficina
-	 * */
+	 */
 	private void createTeacher() {
 
 		Teacher objTeacher = new Teacher();
@@ -103,12 +108,13 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 
 		this.servicioBDUsuarios.save(objTeacher);
 		this.imprimirFormato("SE HA CEADO UN NUEVO DOCENTE", objTeacher.toString());
+
 	}
 
 	/**
 	 * PUNTO 2
 	 * CREAR CURSOS Y ASOCIARLES UNA ASIGNATURA Y UN DOCENTE
-	 * */
+	 */
 	private void createSubject() {
 		List<Course> cursos = new ArrayList<Course>();
 		Subject asignatura1 = new Subject(null, "Mineria de datos", "1234", cursos);
@@ -122,13 +128,14 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 		this.imprimirFormato("SE HA CREADO LA NUEVA ASIGNATURA", newSubject1.toString());
 		this.imprimirFormato("SE HA CREADO LA NUEVA ASIGNATURA", newSubject2.toString());
 		this.imprimirFormato("SE HA CREADO LA NUEVA ASIGNATURA", newSubject3.toString());
+
 	}
 
-	private void createCourse(){
+	private void createCourse() {
 		Random random = new Random();
 		List<Subject> asignaturas = this.subjectRepo.findAll();
 
-		for (Subject asignatura : asignaturas){
+		for (Subject asignatura : asignaturas) {
 			// Generar una letra aleatoria para el nombre del curso
 			String randomizedCharacter = String.valueOf((char) (random.nextInt(26) + 'a'));
 			Course newCurso = new Course(null, randomizedCharacter, asignatura, null);
@@ -138,24 +145,23 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 		}
 	}
 
-	private void asociateCourseAndTeacher(){
+	private void asociateCourseAndTeacher() {
 		List<Course> courseList = this.servicioBDCourses.findAll();
 		List<Teacher> teacherList = this.servicioBDTeachers.findAll();
 
-		for(Teacher teacher : teacherList){
+		for (Teacher teacher : teacherList) {
 			teacher.setCourses(courseList);
 			Teacher t = this.servicioBDUsuarios.save(teacher);
 			this.imprimirFormato("SE HA REALIZADO LA ASOCIACIÓN ENTRE PROFESOR Y CURSOS", t.toString());
 		}
 	}
 
-
 	/**
 	 * PUNTO 3
 	 * CREAR UNA FRANJA HORARIA ASOCIADA A UN CURSO Y UN ESPACIO FISICO
-	 * */
+	 */
 
-	private void createLocations(){
+	private void createLocations() {
 		Location location1 = new Location(null, "Auditorio 1", 20, null);
 		Location location2 = new Location(null, "Sala 4", 15, null);
 		Location location3 = new Location(null, "Sala 332", 15, null);
@@ -171,8 +177,10 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 	}
 
 	private void createTimeSlot1() {
-		Course objCourse = this.servicioBDCourses.findById(1).orElseThrow(()->new RuntimeException("El curso con id 1 no existe"));
-		Location objLocation = this.servicioBDLocations.findById(1).orElseThrow(()->new RuntimeException("La ubicacion con id 1 no existe"));
+		Course objCourse = this.servicioBDCourses.findById(1)
+				.orElseThrow(() -> new RuntimeException("El curso con id 1 no existe"));
+		Location objLocation = this.servicioBDLocations.findById(1)
+				.orElseThrow(() -> new RuntimeException("La ubicacion con id 1 no existe"));
 
 		TimeSlot objTimeSlot = new TimeSlot(
 				null,
@@ -180,16 +188,17 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 				LocalTime.of(14, 00),
 				LocalTime.of(16, 00),
 				objCourse,
-				objLocation
-		);
+				objLocation);
 
 		this.servicioBDTimeSlots.save(objTimeSlot);
 		this.imprimirFormato("SE HA CREADO UNA NUEVA FRANJA HORARIA", objTimeSlot.toString());
 	}
 
 	private void createTimeSlot2() {
-		Course objCourse = this.servicioBDCourses.findById(2).orElseThrow(()->new RuntimeException("El curso con id 2 no existe"));
-		Location objLocation = this.servicioBDLocations.findById(2).orElseThrow(()->new RuntimeException("La ubicacion con id 2 no existe"));
+		Course objCourse = this.servicioBDCourses.findById(2)
+				.orElseThrow(() -> new RuntimeException("El curso con id 2 no existe"));
+		Location objLocation = this.servicioBDLocations.findById(2)
+				.orElseThrow(() -> new RuntimeException("La ubicacion con id 2 no existe"));
 
 		TimeSlot objTimeSlot = new TimeSlot(
 				null,
@@ -197,15 +206,16 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 				LocalTime.of(7, 00),
 				LocalTime.of(9, 00),
 				objCourse,
-				objLocation
-		);
+				objLocation);
 		this.servicioBDTimeSlots.save(objTimeSlot);
 		this.imprimirFormato("SE HA CREADO UNA NUEVA FRANJA HORARIA", objTimeSlot.toString());
 	}
 
 	private void createTimeSlot3() {
-		Course objCourse = this.servicioBDCourses.findById(3).orElseThrow(()->new RuntimeException("El curso con id 3 no existe"));
-		Location objLocation = this.servicioBDLocations.findById(3).orElseThrow(()->new RuntimeException("La ubicacion con id 3 no existe"));
+		Course objCourse = this.servicioBDCourses.findById(3)
+				.orElseThrow(() -> new RuntimeException("El curso con id 3 no existe"));
+		Location objLocation = this.servicioBDLocations.findById(3)
+				.orElseThrow(() -> new RuntimeException("La ubicacion con id 3 no existe"));
 
 		TimeSlot objTimeSlot = new TimeSlot(
 				null,
@@ -213,17 +223,15 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 				LocalTime.of(7, 00),
 				LocalTime.of(9, 00),
 				objCourse,
-				objLocation
-		);
+				objLocation);
 		this.servicioBDTimeSlots.save(objTimeSlot);
 		this.imprimirFormato("SE HA CREADO UNA NUEVA FRANJA HORARIA", objTimeSlot.toString());
 	}
 
-
 	/**
 	 * PUNTO 4
 	 * LISTAR TODAS LAS FRANJAS HORARIAS REGISTRADAS
-	 * */
+	 */
 	private void listTimeSlots() {
 
 		System.out.println("LISTANDO FRANJAS HORARIAS \n");
@@ -245,13 +253,14 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 	/**
 	 * PUNTO 5
 	 * CONSULTAR LAS FRANJAS HORARIAS DE UN DOCENTE
-	 * */
-	private void timeSlotByTeacherId(Integer teacherId){
+	 */
+	private void timeSlotByTeacherId(Integer teacherId) {
 		List<Course> courseList = this.servicioBDTeachers.findAllCoursesById(teacherId);
 
 		System.out.println("FRANJAS DE TRABAJO DEL DOCENTE CON ID " + teacherId.toString());
-		for (Course course : courseList){
-			TimeSlot timeSlot = this.servicioBDTimeSlots.findByCourseId(course.getId()).orElseThrow(() -> new RuntimeException("El curso no tiene una franja horaria asociada"));
+		for (Course course : courseList) {
+			TimeSlot timeSlot = this.servicioBDTimeSlots.findByCourseId(course.getId())
+					.orElseThrow(() -> new RuntimeException("El curso no tiene una franja horaria asociada"));
 			this.imprimirFormato("FRANJA HORARIA", timeSlot.toString());
 		}
 
@@ -260,13 +269,20 @@ public class ParcialPrimerCorteApplication implements CommandLineRunner {
 	/**
 	 * PUNTO 6
 	 * ELIMINAR UN CURSO CON EFECTO CASCADA
-	 * */
-	private void deleteCourseById(Integer courseId){
+	 */
+	private void deleteCourseById(Integer courseId) {
 		System.out.println("SE PROCEDE A ELIMINAR EL CURSO CON ID " + courseId.toString());
 		this.servicioBDCourses.deleteById(courseId);
+
+		if (!this.servicioBDCourses.findById(1).isPresent()) {
+			System.out.println("ELIMINADO");
+		} else {
+			System.out.println("CURSO 1 EXISTE");
+		}
+
 	}
 
-	private void imprimirFormato(String titulo, String texto){
+	private void imprimirFormato(String titulo, String texto) {
 		System.out.println("*********************************\n");
 		System.out.println(titulo);
 		System.out.println("\n*********************************\n");

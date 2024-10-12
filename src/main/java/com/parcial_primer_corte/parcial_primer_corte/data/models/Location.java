@@ -31,7 +31,7 @@ public class Location {
     @Column(name = "capacidad")
     private Integer capacity;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "location")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
     private List<TimeSlot> timeSlots;
 
     @Override

@@ -25,11 +25,11 @@ import lombok.*;
 @Table(name = "docente")
 public class Teacher extends Person {
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
     @JoinColumn(name = "oficina_id", nullable = false)
     private Office office;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "curso_docente", joinColumns = @JoinColumn(name = "docente_id"), inverseJoinColumns = @JoinColumn(name = "curso_id"))
     private List<Course> courses;
 

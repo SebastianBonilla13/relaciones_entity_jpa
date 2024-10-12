@@ -25,7 +25,7 @@ public class Course {
     @JoinColumn(name = "asignatura_id", nullable = false)
     private Subject subject;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<TimeSlot> timeSlots;
 
     @Override
